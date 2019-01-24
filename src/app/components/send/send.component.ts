@@ -56,7 +56,6 @@ export class SendComponent implements OnInit {
     transactions: SendData[] = [];
     showTransactions: SendData[] = [];
     XTZrate = 0;
-
     showBtn = 'Show More';
 
     modalRef1: BsModalRef;
@@ -148,7 +147,21 @@ export class SendComponent implements OnInit {
         } else {
             accountBalance = accountBalance.minus(Number(this.fee));
         }
-        this.amount = accountBalance.toString();
+        if (this.inputValidationService.address(this.toPkh) && this.toPkh.slice(0, 2) === 'tz') { // Check for burn
+            this.operationService.getBalance(this.toPkh).subscribe(
+                (ans: any) => {
+                    if (ans.success && ans.payload.balance === '0') {
+                        accountBalance = accountBalance.minus(0.257);
+                    }
+                    this.amount = accountBalance.toString();
+                },
+                (err) => {
+                    this.amount = accountBalance.toString();
+                }
+            );
+        } else {
+            this.amount = accountBalance.toString();
+        }
     }
 
     open1(template1: TemplateRef<any>) {
@@ -176,7 +189,7 @@ export class SendComponent implements OnInit {
                     this.showTransactions.push(this.transactions[0]);
                 }
             } else {
-                this.transactions = [{to: this.toPkh, amount: Number(this.amount), burn: false}];
+                this.transactions = [{ to: this.toPkh, amount: Number(this.amount), burn: false }];
             }
             this.detectBurns();
             this.close1();
@@ -282,7 +295,7 @@ export class SendComponent implements OnInit {
         for (let i = 0; i < splitted.length; i++) {
             if (splitted[i]) {
                 const splitted2 = splitted[i].trim().split(' ');
-                multipleTransactionsObject.push({to: splitted2[0], amount: Number(splitted2[1])});
+                multipleTransactionsObject.push({ to: splitted2[0], amount: Number(splitted2[1]) });
             }
         }
         console.log(JSON.stringify(multipleTransactionsObject));
@@ -323,13 +336,13 @@ export class SendComponent implements OnInit {
     checkReveal() {
         console.log('check reveal');
         this.operationService.isRevealed(this.activePkh)
-                .subscribe((revealed: boolean) => {
-                    if (!revealed) {
-                        this.recommendedFee = 0.0026;
-                    } else {
-                        this.recommendedFee = 0.0013;
-                    }
-                });
+            .subscribe((revealed: boolean) => {
+                if (!revealed) {
+                    this.recommendedFee = 0.0026;
+                } else {
+                    this.recommendedFee = 0.0013;
+                }
+            });
     }
     invalidInputSingle(): string {
         if (!this.inputValidationService.address(this.activePkh)) {
@@ -396,17 +409,18 @@ export class SendComponent implements OnInit {
 
             if (toMultipleDestinationsArray[index] !== '') {
                 singleSendDataArray = toMultipleDestinationsArray[index].split(' ');
-                console.log('singleSendDataArray: ', singleSendDataArray );
+                console.log('singleSendDataArray: ', singleSendDataArray);
                 if (singleSendDataArray.length === 2) {
                     const singleSendDataCheckresult = this.checkReceiverAndAmount(singleSendDataArray[0], singleSendDataArray[1]);
-                    console.log('singleSendDataArray.length: ', singleSendDataArray.length );
+                    console.log('singleSendDataArray.length: ', singleSendDataArray.length);
                     console.log('singleSendDataCheckresult', singleSendDataCheckresult);
                     if (singleSendDataCheckresult === '') {
-                        this.toMultipleDestinations.push({to: singleSendDataArray[0], amount: Number(singleSendDataArray[1]), burn: false});
+                        this.toMultipleDestinations.push({ to: singleSendDataArray[0],
+                            amount: Number(singleSendDataArray[1]), burn: false });
 
                     } else {
                         this.toMultipleDestinations = [];
-                        const itemIndex =  index + 1;
+                        const itemIndex = index + 1;
                         result = singleSendDataCheckresult + '. ' + 'Error in item ' + itemIndex;
                         return result;
                     }
