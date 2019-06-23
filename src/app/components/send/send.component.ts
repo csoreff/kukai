@@ -41,6 +41,7 @@ export class SendComponent implements OnInit {
     };
 
     isMultipleDestinations = false;
+    isAdvancedView = false;
 
     toMultipleDestinationsString = '';
     toMultipleDestinations: SendData[] = [];

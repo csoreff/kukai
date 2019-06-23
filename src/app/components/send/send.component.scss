@@ -19,7 +19,12 @@
 }
 
 .send-span {
-  height: 204px !important;
+  height: 190px !important;
+}
+
+//Advanced input field - data and gas
+.fix-label {
+  width: 3em !important;
 }
 
 .modal-footer {
@@ -40,12 +45,20 @@
 }
 
 .input-multi-send {
-  margin-bottom: .5rem;  // default at 1rem;
+  //margin-bottom: .5rem;  // default at 1rem;
 }
 
 .show-more {
   font-size: 0.9rem;
   width: 73px;
+}
+
+.btn-advanced {
+  color: #212529;
+  border: none;
+  font-size: 1rem;
+  padding-right: 0rem; // original 0.5rem;
+  padding-left: 0rem; // original 0.5rem;
 }
 
 .btn-balance {
