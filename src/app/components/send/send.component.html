@@ -219,8 +219,10 @@
 
     <!-- Showing different Send Format according to actionButtonString -->
     <button *ngIf='accounts && showSendFormat.btnOutline' type="button" (click)="open1(modal1)" class="btn btn-sm btn-outline-primary btn-op"> {{ 'SENDCOMPONENT.SEND' | translate }} </button>
-    <span *ngIf='accounts && showSendFormat.dropdownItem' class="dropdown-item" (click)="open1(modal1)">{{ activePkh }}</span>
+    <span *ngIf='accounts && showSendFormat.dropdownItem' class="dropdown-item" (click)="open1(modal1)">{{ activePkh }}</span> 
     <span *ngIf='accounts && showSendFormat.btnSidebar' class="btnSidebar" (click)="open1(modal1)"> {{ 'SENDCOMPONENT.SEND' | translate }} </span>
+    <!-- This button is shown only for ICO wallets -->
+    <button *ngIf='accounts && showSendFormat.btnLedger' type="button" (click)="openClaimLedger(modal1)" class="btn btn-sm btn-link btn-ledger"> Claim your tezos ledger </button>
 </ng-container>
 
 <p class="no-accounts" *ngIf='!accounts'>

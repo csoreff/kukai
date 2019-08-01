@@ -2,18 +2,27 @@
   width: 1000px;
   margin: auto;
 }
+
 .mono {
   font-family: "Courier New", Courier, monospace;
 }
+
 .btn-op {
   width: 120px;
   border-radius: 0rem;
   border-top-left-radius: 0.4rem;
   border-bottom-left-radius: 0.4rem;
 }
+
+.btn-ledger {
+  color: #32CD32;
+  font-weight: 700;
+}
+
 .modal-header {
   text-align: center;
 }
+
 .modal-body-success {
   text-align: center;
 }

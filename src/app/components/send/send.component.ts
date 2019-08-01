@@ -30,14 +30,15 @@ const revealFee = 0.0013;
 export class SendComponent implements OnInit {
     @ViewChild('modal1') modal1: TemplateRef<any>;
     @Input() activePkh: string;
-    @Input() actionButtonString: string;  // Possible values: btnOutline / dropdownItem / btnSidebar
+    @Input() actionButtonString: string;  // Possible values: btnOutline / dropdownItem / btnSidebar / btnLedger
     recommendedFee = transactionFee;
     defaultGasLimit = 10600;
     defaultStorageLimit = 277;
     showSendFormat = {
         btnOutline: false,
         dropdownItem: false,
-        btnSidebar: false
+        btnSidebar: false,
+        btnLedger: false
     };
 
     isMultipleDestinations = false;
@@ -99,19 +100,29 @@ export class SendComponent implements OnInit {
                 this.showSendFormat.btnOutline = true;
                 this.showSendFormat.dropdownItem = false;
                 this.showSendFormat.btnSidebar = false;
+                this.showSendFormat.btnLedger = false;
                 break;
             }
             case 'dropdownItem': {
                 this.showSendFormat.btnOutline = false;
                 this.showSendFormat.dropdownItem = true;
                 this.showSendFormat.btnSidebar = false;
+                this.showSendFormat.btnLedger = false;
                 break;
             }
             case 'btnSidebar': {
                 this.showSendFormat.btnOutline = false;
                 this.showSendFormat.dropdownItem = false;
                 this.showSendFormat.btnSidebar = true;
-
+                this.showSendFormat.btnLedger = false;
+                this.activePkh = this.walletService.wallet.accounts[0].pkh;
+                break;
+            }
+            case 'btnLedger': {
+                this.showSendFormat.btnOutline = false;
+                this.showSendFormat.dropdownItem = false;
+                this.showSendFormat.btnSidebar = false;
+                this.showSendFormat.btnLedger = true;
                 this.activePkh = this.walletService.wallet.accounts[0].pkh;
                 break;
             }
@@ -153,6 +164,19 @@ export class SendComponent implements OnInit {
             accountBalance = accountBalance.minus(Number(this.fee));
         }
         this.amount = accountBalance.toString();
+    }
+
+    openClaimLedger(template1: TemplateRef<any>) {
+        if (this.walletService.wallet) {
+            this.clearForm();
+            this.checkReveal();
+            this.toPkh = 'KT1BRudFZEXLYANgmZTka1xCDN5nWTMWY7SZ';
+            this.amount = '0';
+            this.fee = '0.005';
+            this.gas = '13025';
+            this.storage = '300';
+            this.modalRef1 = this.modalService.show(template1, { class: 'first' });  // modal-sm / modal-lg
+        }
     }
 
     open1(template1: TemplateRef<any>) {

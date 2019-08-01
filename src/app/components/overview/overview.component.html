@@ -13,7 +13,9 @@
                     / 1000000 * walletService.wallet.XTZrate | number:'1.00' }} USD)
                 </span>
             </ng-container>
-
+            <div class="text-welcome">
+                Welcome to your Tezos Genesis wallet. 
+            </div>
         </div>
     </div>
 
@@ -83,11 +85,14 @@
     </span>
 
     <!-- Shared Action buttons -->
-    <div class="row row-buttons padding-top-row" *ngIf="!this.walletService.isObserverWallet()">
+    <div class="row row-buttons padding-top-row d-flex justify-content-between" *ngIf="!this.walletService.isObserverWallet()">
         <div class="btn-group btn-group-sm">
             <app-send [activePkh]="selectedPkh" [actionButtonString]="'btnOutline'"></app-send>
             <app-receive [activePkh]="selectedPkh" [actionButtonString]="'btnOutline'"></app-receive>
             <app-new-account [activePkh]="selectedPkh"></app-new-account>
+        </div>
+        <div class="">
+            <app-send [activePkh]="selectedPkh" [actionButtonString]="'btnLedger'"></app-send>
         </div>
     </div>
 </div>
