@@ -38,6 +38,7 @@ export class HomePageComponent implements OnInit {
     }
 
   ngOnInit() {
+      // console.log('Current Node URL ', this.CONSTANTS.getCurrentNodeURL());
   }
 
   testChange(lang: string) {
@@ -64,6 +65,36 @@ export class HomePageComponent implements OnInit {
     const language = map.get(lang);
 
     return language;
+  }
+
+  changeNodeURL(url: string) {
+    this.CONSTANTS.changeNodeURL(url);
+    console.log('Current Node URL ', this.CONSTANTS.NET.NODE_URL);
+  }
+
+  returnCurrentNode(url: string) {
+
+    // console.log('Current Node URL ', url);
+
+    const map: Map<string, string> = new Map([
+        // Mainnet
+        ['https://rpc.tzbeta.net/', 'TF'],
+        ['https://mainnet-node.tzscan.io/', 'Tzscan'],
+        ['https://mainnet.tezrpc.me/', 'TezRPC'],
+        //['https://teznode.letzbake.com/]', 'LETZBAKE']
+        // Other mainnet nodes: Obsidian's public nodes, Galleon public nodes, Simple-staking, Polychain, tplus.dev
+
+        // Alphanet
+        ['https://rpcalpha.tzbeta.net', 'TF Alphanet'],
+        ['https://alphanet-node.tzscan.io/', 'Tzscan Alphanet'],
+
+        // Zeronet
+        ['https://zeronet-node.tzscan.io/', 'Tzscan Zeronet']
+    ]);
+
+    const currentNode = map.get(url);
+
+    return currentNode;
   }
 
   logout() {

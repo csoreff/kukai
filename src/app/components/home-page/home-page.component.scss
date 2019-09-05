@@ -103,9 +103,17 @@ a, a:hover, a:focus {
     // justify-content: flex-end;  // btn are pushed to far-right
 }
 
-.language-btn {
+.language-div-btn {
     padding-right: 1.5em;
-    min-width: 90px;
+}
+
+.language-btn {
+    min-width: 97px !important;
+}
+
+.node-btn {
+    //padding-right: 1.5em;
+    min-width: 135px !important;
 }
 
 .topbar-links {

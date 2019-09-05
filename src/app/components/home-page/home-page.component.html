@@ -19,8 +19,8 @@
     <div class="col-sm topbar-btn">
 
         <!-- Language Button -->
-        <div class="btn-group dropdown-padding language-btn" dropdown>
-            <button id="button-language" dropdownToggle type="button" class="btn btn-light dropdown-toggle btn-sm"
+        <div class="btn-group dropdown-padding language-div-btn" dropdown>
+            <button id="button-language" dropdownToggle type="button" class="btn btn-light dropdown-toggle btn-sm language-btn"
                     aria-controls="dropdown-basic">
                 {{ returnLanguage (translate.currentLang) }} <span class="caret"></span>
             </button>
@@ -72,6 +72,19 @@
             -->
         </div>
 
+        <!-- Node Button -->
+        <div class="btn-group dropdown-padding" dropdown>
+            <button id="button-language" dropdownToggle type="button" class="btn btn-light dropdown-toggle btn-sm node-btn"
+                    aria-controls="dropdown-basic">
+                {{ returnCurrentNode (CONSTANTS.getCurrentNodeURL()) }} <span class="caret"></span>
+            </button>
+
+            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-language">
+                <li role="menuitem" *ngFor="let url of CONSTANTS.NET.OTHERNODESURLS" [value]="url" (click)="changeNodeURL(url)">
+                    <span class="dropdown-item"> {{ returnCurrentNode (url) }} </span>
+                </li>
+            </ul>
+        </div>
         <!--
         <span class="topbar-links">
             <div class="btn-topbar">
