@@ -31,7 +31,7 @@ export class Constants {
             NODE_URL: 'https://zeronet-node.tzscan.io/',
             BLOCK_EXPLORER_URL: 'https://zeronet.tzscan.io/',
             CHAIN_ID: 'ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK',
-            OTHERNODESURLS: ['https://zeronet-node.tzscan.io/']
+            OTHERNODESURLS: ['https://zeronet-node.tzscan.io/', 'https://zeronet-node.tzscan.io/']
         };
         return ZERONET;
     }
@@ -39,10 +39,10 @@ export class Constants {
         const ALPHANET: Net = {
             NAME: 'Alphanet',
             API_URL: 'https://api.alphanet.tzscan.io/',
-            NODE_URL: 'https://rpcalpha.tzbeta.net',
+            NODE_URL: 'https://rpcalpha.tzbeta.net/',
             BLOCK_EXPLORER_URL: 'https://alphanet.tzscan.io/',
             CHAIN_ID: 'Pt24m4xiPbLDhVgVfABUjirbmda3yohdN82Sp9FeuAXJ4eV9otd',
-            OTHERNODESURLS: ['https://rpcalpha.tzbeta.net', 'https://alphanet-node.tzscan.io/']
+            OTHERNODESURLS: ['https://rpcalpha.tzbeta.net/', 'https://alphanet-node.tzscan.io/']
         };
         return ALPHANET;
     }

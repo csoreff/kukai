@@ -85,10 +85,11 @@ export class HomePageComponent implements OnInit {
         // Other mainnet nodes: Obsidian's public nodes, Galleon public nodes, Simple-staking, Polychain, tplus.dev
 
         // Alphanet
-        ['https://rpcalpha.tzbeta.net', 'TF Alphanet'],
+        ['https://rpcalpha.tzbeta.net/', 'TF Alphanet'],
         ['https://alphanet-node.tzscan.io/', 'Tzscan Alphanet'],
 
         // Zeronet
+        ['https://rpczero.tzbeta.net/', 'TF Zeronet'],
         ['https://zeronet-node.tzscan.io/', 'Tzscan Zeronet']
     ]);
 
