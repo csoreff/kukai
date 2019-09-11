@@ -17,8 +17,6 @@ export class WalletService {
 
   NETWORK;
 
-  currentNode = '';  // Not used
-
   constructor(
     private translate: TranslateService,
     private encryptionService: EncryptionService,
@@ -26,17 +24,6 @@ export class WalletService {
   ) {
     this.NETWORK = operationService.NETWORK;
   }
-  /*
-    Node
-  */
- /*
-  setCurrentNodeURL(url: string) {
-    this.NETWORK.setCurrentNodeURL(url);
-  }
-  getCurrentNodeURL() {
-    return this.NETWORK.getCurrentNodeURL();
-  }
-  */
   /*
     Wallet creation
   */

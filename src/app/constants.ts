@@ -56,7 +56,7 @@ export class Network {
             NODE_URL: 'https://mainnet.tezrpc.me/',
             BLOCK_EXPLORER_URL: 'https://tzscan.io/',
             CHAIN_ID: 'Pt24m4xiPbLDhVgVfABUjirbmda3yohdN82Sp9FeuAXJ4eV9otd',
-            OTHERNODESURLS: ['https://rpc.tzbeta.net/', 'https://mainnet-node.tzscan.io/', 'https://mainnet.tezrpc.me/']
+            OTHERNODESURLS: ['https://rpc.tzbeta.net/', 'https://mainnet-node.tzscan.io/', 'https://mainnet.tezrpc.me/', 'https://tezos-rpc.nodes.polychainlabs.com/']
         };
         return MAINNET;
     }

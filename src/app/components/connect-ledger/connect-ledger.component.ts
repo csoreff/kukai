@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-// import { Network } from '../../constants';
 
 import { WalletService } from '../../services/wallet.service';
 import { LedgerService } from '../../services/ledger.service';
@@ -15,7 +14,7 @@ import { InputValidationService } from '../../services/input-validation.service'
 })
 export class ConnectLedgerComponent implements OnInit {
   activePanel = 0;
-  // NETWORK = new Network();
+
   NETWORK;
 
   path = '44\'/1729\'/0\'/0\'';

@@ -2,7 +2,6 @@ import { Component, Input, OnInit, AfterViewInit, SimpleChange } from '@angular/
 import { WalletService } from '../../services/wallet.service';
 import { TzscanService } from '../../services/tzscan.service';
 
-// import { Network } from '../../constants';
 import { TimeAgoPipe } from '../../pipes/time-ago.pipe';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -13,7 +12,6 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ActivityComponent implements OnInit {
     accounts = null;
-    // NETWORK = new Network();
 
     NETWORK;
 
@@ -85,7 +83,4 @@ export class ActivityComponent implements OnInit {
         return counterparty;
     }
 
-    showCurrentNodeURL() {
-        console.log('current node URL is ', this.walletService.NETWORK.getCurrentNodeURL());
-    }
 }

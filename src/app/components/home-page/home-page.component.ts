@@ -6,8 +6,6 @@ import { TranslateService } from '@ngx-translate/core';  // Init the TranslateSe
 import { WalletService } from '../../services/wallet.service';
 import { CoordinatorService } from '../../services/coordinator.service';
 
-// import { Network } from '../../constants';
-
 @Component({
     selector: 'app-home-page',
     templateUrl: './home-page.component.html',
@@ -16,7 +14,6 @@ import { CoordinatorService } from '../../services/coordinator.service';
 export class HomePageComponent implements OnInit {
     isCollapsed = false;
 
-    // NETWORK = new Network();  // Initialise in the constructor from walletService
     NETWORK;
     param = {value: 'world'};  // Test translation
 
@@ -39,9 +36,7 @@ export class HomePageComponent implements OnInit {
         this.NETWORK = walletService.NETWORK;
     }
 
-  ngOnInit() {
-      // console.log('Current Node URL ', this.NETWORK.getCurrentNodeURL());
-  }
+  ngOnInit() {}
 
   testChange(lang: string) {
     console.log('lang in testChange() ', lang);
@@ -80,18 +75,19 @@ export class HomePageComponent implements OnInit {
 
     const map: Map<string, string> = new Map([
         // Mainnet
-        ['https://rpc.tzbeta.net/', 'TF'],
-        ['https://mainnet-node.tzscan.io/', 'Tzscan'],
+        ['https://rpc.tzbeta.net/', 'Tezos Foundation'],
         ['https://mainnet.tezrpc.me/', 'TezRPC'],
+        ['https://tezos-rpc.nodes.polychainlabs.com/', 'Polychain Labs'],
+        ['https://mainnet-node.tzscan.io/', 'Tzscan'],
         //['https://teznode.letzbake.com/]', 'LETZBAKE']
-        // Other mainnet nodes: Obsidian's public nodes, Galleon public nodes, Simple-staking, Polychain, tplus.dev
+        // Other mainnet nodes: Galleon public nodes, Simple-staking, Polychain, tplus.dev
 
         // Alphanet
-        ['https://rpcalpha.tzbeta.net/', 'TF Alphanet'],
+        ['https://rpcalpha.tzbeta.net/', 'Tezos Foundation Alphanet'],
         ['https://alphanet-node.tzscan.io/', 'Tzscan Alphanet'],
 
         // Zeronet
-        ['https://rpczero.tzbeta.net/', 'TF Zeronet'],
+        ['https://rpczero.tzbeta.net/', 'Tezos Foundation Zeronet'],
         ['https://zeronet-node.tzscan.io/', 'Tzscan Zeronet']
     ]);
 

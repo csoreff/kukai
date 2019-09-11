@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-// import { Network } from '../../constants';
 import { TranslateService } from '@ngx-translate/core';  // Multiple instances created ?
 
 import { ImportService } from '../../services/import.service';
@@ -17,7 +16,6 @@ import { InputValidationService } from '../../services/input-validation.service'
   styleUrls: ['./mnemonic-import.component.scss']
 })
 export class MnemonicImportComponent implements OnInit {
-  // NETWORK = new Network();
   NETWORK;
 
   MIN_PWD_LENGTH = 9;
