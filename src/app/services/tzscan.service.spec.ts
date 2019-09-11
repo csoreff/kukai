@@ -28,7 +28,7 @@ describe('[ TzscanService ]', () => {
 
    	 	service = TestBed.get(TzscanService);
 		httpMock  = TestBed.get(HttpTestingController);
-		apiUrl = service.CONSTANTS.NET.API_URL;
+		apiUrl = service.NETWORK.NET.API_URL;
 	});
 
 	it('should be created', () => {

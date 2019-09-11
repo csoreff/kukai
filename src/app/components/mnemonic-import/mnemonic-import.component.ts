@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Constants } from '../../constants';
+// import { Network } from '../../constants';
 import { TranslateService } from '@ngx-translate/core';  // Multiple instances created ?
 
 import { ImportService } from '../../services/import.service';
@@ -17,7 +17,9 @@ import { InputValidationService } from '../../services/input-validation.service'
   styleUrls: ['./mnemonic-import.component.scss']
 })
 export class MnemonicImportComponent implements OnInit {
-  CONSTANTS = new Constants();
+  // NETWORK = new Network();
+  NETWORK;
+
   MIN_PWD_LENGTH = 9;
   mnemonic: string;
   email: string;
@@ -44,7 +46,9 @@ export class MnemonicImportComponent implements OnInit {
     private coordinatorService: CoordinatorService,
     private exportService: ExportService,
     private inputValidationService: InputValidationService
-  ) { }
+  ) {
+    this.NETWORK = walletService.NETWORK;
+  }
 
   ngOnInit() {
   }

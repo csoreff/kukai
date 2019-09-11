@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';  // Init the TranslateSe
 import { WalletService } from '../../services/wallet.service';
 import { CoordinatorService } from '../../services/coordinator.service';
 
-import { Constants } from '../../constants';
+// import { Network } from '../../constants';
 
 @Component({
     selector: 'app-home-page',
@@ -16,8 +16,8 @@ import { Constants } from '../../constants';
 export class HomePageComponent implements OnInit {
     isCollapsed = false;
 
-    CONSTANTS = new Constants();
-
+    // NETWORK = new Network();  // Initialise in the constructor from walletService
+    NETWORK;
     param = {value: 'world'};  // Test translation
 
     constructor(
@@ -35,10 +35,12 @@ export class HomePageComponent implements OnInit {
         const browserLang = translate.getBrowserLang();
         console.log('browserLang ', browserLang);
         translate.use(browserLang.match(/en|fr|ru|jp|kor|por/) ? browserLang : 'en');
+
+        this.NETWORK = walletService.NETWORK;
     }
 
   ngOnInit() {
-      // console.log('Current Node URL ', this.CONSTANTS.getCurrentNodeURL());
+      // console.log('Current Node URL ', this.NETWORK.getCurrentNodeURL());
   }
 
   testChange(lang: string) {
@@ -68,8 +70,8 @@ export class HomePageComponent implements OnInit {
   }
 
   changeNodeURL(url: string) {
-    this.CONSTANTS.changeNodeURL(url);
-    console.log('Current Node URL ', this.CONSTANTS.NET.NODE_URL);
+    this.walletService.NETWORK.setCurrentNodeURL(url);
+    console.log('Current Node URL ', this.walletService.NETWORK.NET.NODE_URL);
   }
 
   returnCurrentNode(url: string) {

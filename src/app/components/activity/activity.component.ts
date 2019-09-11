@@ -2,7 +2,7 @@ import { Component, Input, OnInit, AfterViewInit, SimpleChange } from '@angular/
 import { WalletService } from '../../services/wallet.service';
 import { TzscanService } from '../../services/tzscan.service';
 
-import { Constants } from '../../constants';
+// import { Network } from '../../constants';
 import { TimeAgoPipe } from '../../pipes/time-ago.pipe';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -13,13 +13,17 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ActivityComponent implements OnInit {
     accounts = null;
-    CONSTANTS = new Constants();
+    // NETWORK = new Network();
+
+    NETWORK;
 
     @Input() activePkh: string;
     constructor(
         private walletService: WalletService,
         private tzscanService: TzscanService,
-    ) {}
+    ) {
+        this.NETWORK = walletService.NETWORK;
+    }
 
     ngOnInit() { if (this.walletService.wallet) { this.init(); } }
     init() {
@@ -79,5 +83,9 @@ export class ActivityComponent implements OnInit {
         }
 
         return counterparty;
+    }
+
+    showCurrentNodeURL() {
+        console.log('current node URL is ', this.walletService.NETWORK.getCurrentNodeURL());
     }
 }

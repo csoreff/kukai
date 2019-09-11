@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Constants } from '../constants';
+import { Network } from '../constants';
 import { of ,  forkJoin ,  Observable } from 'rxjs';
 import { timeout, catchError, flatMap, mergeMap } from 'rxjs/operators';
 
+import { WalletService } from './wallet.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -12,9 +13,19 @@ const httpOptions = {
 
 @Injectable()
 export class TzscanService {
-  CONSTANTS = new Constants();
-  apiUrl = this.CONSTANTS.NET.API_URL;
-  constructor(private http: HttpClient) { }
+  // NETWORK = new Network();
+  // apiUrl = this.NETWORK.NET.API_URL;
+
+  NETWORK;
+  apiUrl;
+
+  constructor(
+    private http: HttpClient,
+    private walletService: WalletService
+  ) {
+    this.NETWORK = walletService.NETWORK;
+    this.apiUrl = this.NETWORK.NET.API_URL;
+  }
 
   numberOperations(pkh: string) {
     return this.http.get(this.apiUrl + 'v1/number_operations/' + pkh);

@@ -1,4 +1,5 @@
 <div *ngIf='accounts'>
+    <button (click)="showCurrentNodeURL()">Test</button> <!-- to erase -->
     <ng-container *ngFor="let account of accounts">
         <ng-container *ngIf="account.pkh === activePkh && 'ACTIVITYCOMPONENT.TXNHASH' | translate">
             <table class="table table-striped">
@@ -18,14 +19,14 @@
                         <!-- Txn Hash -->
                         <th scope="row" class="row-hash table-cell">
                             <span data-toggle="tooltip" [title]="transaction.hash">
-                                <a href="{{ CONSTANTS.NET.BLOCK_EXPLORER_URL + transaction.hash }}" target="_blank"> {{ transaction.hash | truncate: '4':'true'}} </a>
+                                <a href="{{ NETWORK.NET.BLOCK_EXPLORER_URL + transaction.hash }}" target="_blank"> {{ transaction.hash | truncate: '4':'true'}} </a>
                             </span>
                         </th>
 
                         <!-- Block -->
                         <td class="table-cell"> 
                             <span data-toggle="tooltip" [title]="transaction.block">
-                                <a href="{{ CONSTANTS.NET.BLOCK_EXPLORER_URL + transaction.block }}" target="_blank"> {{ transaction.block | truncate: '4':'true'}} </a>
+                                <a href="{{ NETWORK.NET.BLOCK_EXPLORER_URL + transaction.block }}" target="_blank"> {{ transaction.block | truncate: '4':'true'}} </a>
                             </span>
                         </td>
 
@@ -66,7 +67,7 @@
 
                         <!-- Status -->
                         <td class="amount table-cell">
-                            <a href="{{ CONSTANTS.NET.BLOCK_EXPLORER_URL + transaction.hash }}" target="_blank">{{ getStatus(transaction) }}</a>
+                            <a href="{{ NETWORK.NET.BLOCK_EXPLORER_URL + transaction.hash }}" target="_blank">{{ getStatus(transaction) }}</a>
                         </td>
                     </tr>
                     <!-- Show More Button -->

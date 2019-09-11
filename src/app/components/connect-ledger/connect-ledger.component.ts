@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Constants } from '../../constants';
+// import { Network } from '../../constants';
 
+import { WalletService } from '../../services/wallet.service';
 import { LedgerService } from '../../services/ledger.service';
 import { ImportService } from '../../services/import.service';
 import { MessageService } from '../../services/message.service';
@@ -14,21 +15,26 @@ import { InputValidationService } from '../../services/input-validation.service'
 })
 export class ConnectLedgerComponent implements OnInit {
   activePanel = 0;
-  CONSTANTS = new Constants();
+  // NETWORK = new Network();
+  NETWORK;
+
   path = '44\'/1729\'/0\'/0\'';
   pendingLedgerConfirmation = false;
   isHDDerivationPathCustom = false;
 
   constructor(
     private router: Router,
+    private walletService: WalletService,
     private ledgerService: LedgerService,
     private importService: ImportService,
     private messageService: MessageService,
     private inputValidationService: InputValidationService
-    ) { }
+    ) {
+      this.NETWORK = walletService.NETWORK;
+    }
 
   ngOnInit() {
-    if (this.CONSTANTS.NET.NAME !== 'Mainnet') {
+    if (this.NETWORK.NET.NAME !== 'Mainnet') {
       this.path = '44\'/1729\'/1\'/0\'';
     }
   }

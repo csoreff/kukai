@@ -14,11 +14,29 @@ import { OperationService } from './operation.service';
 export class WalletService {
   storeKey = `kukai-wallet`;
   wallet: Wallet;
+
+  NETWORK;
+
+  currentNode = '';  // Not used
+
   constructor(
     private translate: TranslateService,
     private encryptionService: EncryptionService,
     private operationService: OperationService
-  ) { }
+  ) {
+    this.NETWORK = operationService.NETWORK;
+  }
+  /*
+    Node
+  */
+ /*
+  setCurrentNodeURL(url: string) {
+    this.NETWORK.setCurrentNodeURL(url);
+  }
+  getCurrentNodeURL() {
+    return this.NETWORK.getCurrentNodeURL();
+  }
+  */
   /*
     Wallet creation
   */

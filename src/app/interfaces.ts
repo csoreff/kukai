@@ -3,6 +3,14 @@ export interface KeyPair {
     pk: string|null;
     pkh: string;
 }
+export interface Net {
+  NAME: string;
+  API_URL: string;
+  NODE_URL: string;
+  BLOCK_EXPLORER_URL: string;
+  CHAIN_ID: string;
+  OTHERNODESURLS: string[];
+}
 export interface Wallet {
   seed: null|string;
   salt: null|string;

@@ -10,7 +10,7 @@ import Big from 'big.js';
 
 import { TranslateService } from '@ngx-translate/core';  // Multiple instances created ?
 
-import { Constants } from '../constants';
+import { Network } from '../constants';
 
 import { ErrorHandlingPipe } from '../pipes/error-handling.pipe';
 
@@ -25,9 +25,9 @@ export interface KeyPair {
 }
 @Injectable()
 export class OperationService {
-  CONSTANTS = new Constants();
-  nodeURL = this.CONSTANTS.NET.NODE_URL;
-  CHAIN_ID = this.CONSTANTS.NET.CHAIN_ID;
+  NETWORK = new Network();
+  nodeURL = this.NETWORK.NET.NODE_URL;
+  CHAIN_ID = this.NETWORK.NET.CHAIN_ID;
   prefix = {
     tz1: new Uint8Array([6, 161, 159]),
     tz2: new Uint8Array([6, 161, 161]),
