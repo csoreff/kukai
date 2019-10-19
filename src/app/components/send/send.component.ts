@@ -28,7 +28,7 @@ const pkh2pkh = {
 const pkh2kt = {
     gas: 15400,
     storage: 0,
-    fee: 0.0016
+    fee: 0.0017
 };
 const kt2pkh = {
     gas: 26300,
@@ -374,6 +374,12 @@ export class SendComponent implements OnInit {
 
     toggleDestination() {
         this.isMultipleDestinations = !this.isMultipleDestinations;
+
+        if (this.isMultipleDestinations) {
+            this.setDefaultValues(pkh2kt);
+        } else {
+            this.setDefaultValues(pkh2pkh);
+        }
     }
 
     clearForm() {
