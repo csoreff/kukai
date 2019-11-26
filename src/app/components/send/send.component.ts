@@ -23,22 +23,22 @@ interface SendData {
 const pkh2pkh = {
     gas: 10600,
     storage: 277,
-    fee: 0.00135
+    fee: 0.0014
 };
 const pkh2kt = {
     gas: 15400,
     storage: 0,
-    fee: 0.0017
+    fee: 0.0019
 };
 const kt2pkh = {
     gas: 26300,
-    storage: 0,
+    storage: 277,
     fee: 0.003
 };
 const kt2kt = {
     gas: 44800,
     storage: 0,
-    fee: 0.0052
+    fee: 0.005
 };
 
 const revealFee = 0.0013;
@@ -50,7 +50,7 @@ const revealFee = 0.0013;
     styleUrls: ['./send.component.scss']
 })
 export class SendComponent implements OnInit {
-    @ViewChild('modal1', {static: false}) modal1: TemplateRef<any>;
+    @ViewChild('modal1', { static: false }) modal1: TemplateRef<any>;
     @Input() activePkh: string;
     @Input() actionButtonString: string;  // Possible values: btnOutline / dropdownItem / btnSidebar
 
@@ -175,13 +175,18 @@ export class SendComponent implements OnInit {
     sendEntireBalance(accountPkh: string, event: Event) {
         event.stopPropagation();
         const index = this.accounts.findIndex(account => account.pkh === accountPkh);
-        let accountBalance = Big(this.accounts[index].balance.balanceXTZ).div(1000000);
-        if (!this.fee) {
-            accountBalance = accountBalance.minus(this.recommendedFee);
+        if (accountPkh && accountPkh.slice(0, 2) === 'tz') {
+            let accountBalance = Big(this.accounts[index].balance.balanceXTZ).div(1000000);
+            if (!this.fee) {
+                accountBalance = accountBalance.minus(this.recommendedFee);
+            } else {
+                accountBalance = accountBalance.minus(Number(this.fee));
+            }
+            accountBalance = accountBalance.minus(0.000001); // dust
+            this.amount = accountBalance.toString();
         } else {
-            accountBalance = accountBalance.minus(Number(this.fee));
+            this.amount = Big(this.accounts[index].balance.balanceXTZ).div(1000000).toString();
         }
-        this.amount = accountBalance.toString();
     }
 
     open1(template1: TemplateRef<any>) {
@@ -424,21 +429,32 @@ export class SendComponent implements OnInit {
                     this.extraFee = 0;
                 }
                 this.recommendedFee = this.defaultFee + this.extraFee;
+                this.updateDefaultValues();
             });
     }
 
     updateDefaultValues() {
-        if (this.activePkh.slice(0, 2) === 'tz') {
-            if (this.toPkh.length < 2 || this.toPkh.slice(0, 2) !== 'KT') {
-                this.setDefaultValues(pkh2pkh);
+        if (this.activePkh && this.activePkh.length) {
+            if (!this.isMultipleDestinations) {
+                if (this.activePkh.slice(0, 2) === 'tz') {
+                    if (this.toPkh.length < 2 || this.toPkh.slice(0, 2) !== 'KT') {
+                        this.setDefaultValues(pkh2pkh);
+                    } else {
+                        this.setDefaultValues(pkh2kt);
+                    }
+                } else {
+                    if (this.toPkh.length < 2 || this.toPkh.slice(0, 2) !== 'KT') {
+                        this.setDefaultValues(kt2pkh);
+                    } else {
+                        this.setDefaultValues(kt2kt);
+                    }
+                }
             } else {
-                this.setDefaultValues(pkh2kt);
-            }
-        } else {
-            if (this.toPkh.length < 2 || this.toPkh.slice(0, 2) !== 'KT') {
-                this.setDefaultValues(kt2pkh);
-            } else {
-                this.setDefaultValues(kt2kt);
+                if (this.activePkh.slice(0, 2) === 'tz') {
+                    this.setDefaultValues(pkh2kt);
+                } else {
+                    this.setDefaultValues(kt2kt);
+                }
             }
         }
     }

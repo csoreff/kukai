@@ -14,9 +14,7 @@ import { Constants } from '../constants';
 
 import { ErrorHandlingPipe } from '../pipes/error-handling.pipe';
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+const httpOptions = {headers: { 'Content-Type': 'application/json' }};
 
 export interface KeyPair {
   sk: string | null;
@@ -163,7 +161,7 @@ export class OperationService {
                 if (manager === null) { // Reveal
                   fop.contents.push({
                     kind: 'reveal',
-                    source: from,
+                    source: keys.pkh,
                     fee: '0',
                     counter: (++counter).toString(),
                     gas_limit: '10000',
@@ -265,7 +263,7 @@ export class OperationService {
                   fop.contents[1] = fop.contents[0];
                   fop.contents[0] = {
                     kind: 'reveal',
-                    source: from,
+                    source: keys.pkh,
                     fee: '0',
                     counter: (counter).toString(),
                     gas_limit: '10000',
@@ -363,6 +361,10 @@ export class OperationService {
     }
   }
   errHandler(error: any): Observable<any> {
+    if (error.response) {
+      console.log(error.response);
+    }
+    console.log(JSON.stringify(error));
     if (error.error && error.error[0] && error.error[0].id) {
       const errorId = error.error[0].id;
       const errorMsg = this.errorHandlingPipe.transform(errorId);
@@ -375,7 +377,6 @@ export class OperationService {
       error = this.errorHandlingPipe.transform(error.message);
     } else {
       console.log('Error not categorized');
-      console.log(JSON.stringify(error));
     }
     return of(
       {
@@ -781,13 +782,13 @@ export class OperationService {
   }
   zarithDecodeInt(hex: string): any {
     let count = 0;
-    let value = 0;
+    let value = Big(0);
     while (1) {
       const byte = Number('0x' + hex.slice(0 + count * 2, 2 + count * 2));
       if (count === 0) {
-        value += ((byte & 63) * (128 ** count));
+        value = Big(((byte & 63) * (128 ** count))).add(value);
       } else {
-        value += (((byte & 127) * (128 ** count)) >> 1);
+        value = Big(((byte & 127) * 2) >> 1).times(64 * 128 ** (count - 1)).add(value);
       }
       count++;
       if ((byte & 128) !== 128) {
