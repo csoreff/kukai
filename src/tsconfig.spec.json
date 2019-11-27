@@ -3,13 +3,15 @@
   "compilerOptions": {
     "outDir": "../out-tsc/spec",
     "baseUrl": "./",
+    "target": "es5",
     "types": [
       "jasmine",
       "node"
     ]
   },
   "files": [
-    "test.ts",    "polyfills.ts"
+    "test.ts",
+    "polyfills.ts"
 
   ],
   "include": [

@@ -13,6 +13,15 @@
     background-color: #cccccc;
 }
 
+.ledger-img {
+    background: url(../../../assets/img/ledger-logo.svg);
+    background-color: rgba(0, 0, 0, 0.03);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 50%;
+    height: 7rem;
+}
+
 /* Taking out underline link in router link */
 a.active-link {
     text-decoration: none;

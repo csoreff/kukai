@@ -8,7 +8,7 @@ interface Net {
 export class Constants {
     // Select Testnet or Mainnet
     // readonly NET: Net = this.testnet();
-    readonly NET: Net = this.mainnet();
+    readonly NET: Net = this.testnet();
 
     testnet(): Net {
         const TESTNET: Net = {
